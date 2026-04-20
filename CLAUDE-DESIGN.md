@@ -48,7 +48,7 @@ The voice is confident without boast: claims sit beside evidence, metaphors are 
 Once you've followed [`GITHUB-SETUP.md`](./GITHUB-SETUP.md), paste your repo URL here. It will look like:
 
 ```
-https://github.com/<your-github-username>/sircharles-design-system
+https://github.com/SirCharles-DESIGN/sircharles-design-system
 ```
 
 Claude Design will read the entire repo. The structure is intentionally legible: `brand/` for human guidelines, `tokens/` for machine-readable values, `components/` for live HTML examples.
