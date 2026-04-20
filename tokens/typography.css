@@ -1,0 +1,83 @@
+/* ============================================================
+   SirCharles.DESIGN — Typography Tokens
+   Single typeface across the entire system: Muli (sans-serif).
+   Loaded from Google Fonts as a no-cost public mirror; the
+   live site self-hosts the same family via Shopify's CDN.
+   ============================================================ */
+
+/* Public mirror so the repo works without Shopify CDN access.
+   If you self-host, drop the @import and link your own woff2. */
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;900&display=swap");
+
+:root {
+  /* Stack: Mulish (Google Fonts name) is the modern release of Muli.
+     Either name resolves to the same letterforms. */
+  --font-sans:           "Mulish", "Muli", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-headings:       var(--font-sans);
+  --font-body:           var(--font-sans);
+
+  /* Weights — match live theme exactly */
+  --fw-regular:          400;
+  --fw-semibold:         600;   /* Body bold */
+  --fw-bold:             700;   /* Headings */
+  --fw-black:            900;   /* Heading bold / display */
+
+  /* Type scale — mobile-first; large display sizes earn their keep on dark BG */
+  --fs-12:               0.75rem;   /* 12 — caption / fine print */
+  --fs-14:               0.875rem;  /* 14 — UI labels */
+  --fs-16:               1rem;      /* 16 — body */
+  --fs-18:               1.125rem;  /* 18 — body large / lead */
+  --fs-22:               1.375rem;  /* 22 — H4 / card title */
+  --fs-28:               1.75rem;   /* 28 — H3 */
+  --fs-40:               2.5rem;    /* 40 — H2 */
+  --fs-64:               4rem;      /* 64 — H1 (mobile-friendly hero) */
+  --fs-96:               6rem;      /* 96 — Display (matches theme base) */
+
+  /* Line heights */
+  --lh-display:          1.1;       /* Headings — tight per theme */
+  --lh-body:             1.3;       /* Body — per theme */
+  --lh-prose:            1.55;      /* Long-form reading override */
+
+  /* Letter spacing */
+  --ls-display:          -0.01em;   /* Per theme */
+  --ls-body:             0em;
+  --ls-uppercase:        0.04em;    /* For buttons / eyebrows */
+
+  /* UI text transforms — buttons & eyebrows are uppercase per theme */
+  --tt-button:           uppercase;
+}
+
+/* -------- Base elements -------- */
+html { font-family: var(--font-body); }
+
+h1, h2, h3, h4, h5, h6, .sc-display {
+  font-family: var(--font-headings);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  margin: 0;
+}
+
+h1, .sc-h1 { font-size: clamp(var(--fs-40), 6vw, var(--fs-96)); font-weight: var(--fw-black); }
+h2, .sc-h2 { font-size: clamp(var(--fs-28), 4vw, var(--fs-64)); }
+h3, .sc-h3 { font-size: var(--fs-40); }
+h4, .sc-h4 { font-size: var(--fs-28); }
+h5, .sc-h5 { font-size: var(--fs-22); }
+h6, .sc-h6 { font-size: var(--fs-18); text-transform: var(--tt-button); letter-spacing: var(--ls-uppercase); }
+
+body, p, .sc-body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+}
+
+.sc-eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-14);
+  text-transform: var(--tt-button);
+  letter-spacing: var(--ls-uppercase);
+}
+
+.sc-prose { line-height: var(--lh-prose); }

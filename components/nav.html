@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SirCharles.DESIGN — Nav</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;900&display=swap">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <style>
+    body {
+      background: var(--color-bg-page);
+      color: var(--color-fg-primary);
+      font-family: var(--font-body);
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    /* ============================================================
+       Site header — three-zone (logo · nav · CTA), full width,
+       sits flush to top of page with hairline bottom border.
+       ============================================================ */
+    .sc-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--sp-8);
+      padding: var(--sp-6) var(--page-pad-x);
+      border-bottom: var(--bw-hairline) solid var(--color-border);
+      background: var(--color-bg-page);
+      position: sticky; top: 0; z-index: 50;
+    }
+
+    .sc-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      text-decoration: none;
+      color: var(--sc-cyan);
+    }
+    .sc-logo__mark {
+      width: 28px; height: 28px;
+      filter: drop-shadow(0 0 8px var(--sc-cyan-60));
+    }
+    .sc-logo__wordmark {
+      font-family: var(--font-headings);
+      font-weight: var(--fw-black);
+      font-size: var(--fs-18);
+      letter-spacing: var(--ls-display);
+      text-transform: uppercase;
+    }
+    .sc-logo__wordmark .sc-logo__suffix {
+      color: var(--sc-white);
+      font-weight: var(--fw-regular);
+      letter-spacing: var(--ls-uppercase);
+    }
+
+    .sc-nav {
+      display: flex;
+      gap: var(--sp-8);
+      justify-content: center;
+    }
+    .sc-nav__link {
+      color: var(--sc-cyan);
+      text-decoration: none;
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-14);
+      text-transform: uppercase;
+      letter-spacing: var(--ls-uppercase);
+      padding: var(--sp-2) 0;
+      position: relative;
+      transition: opacity var(--dur-base) var(--ease-standard);
+    }
+    .sc-nav__link::after {
+      content: "";
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 1px; background: var(--sc-cyan);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--dur-base) var(--ease-standard);
+    }
+    .sc-nav__link:hover::after,
+    .sc-nav__link[aria-current="page"]::after { transform: scaleX(1); }
+
+    .sc-cta {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: 0.75rem 1.5rem;
+      background: var(--sc-cyan);
+      color: var(--sc-black);
+      border: var(--bw-hairline) solid var(--sc-cyan);
+      border-radius: var(--radius-pill);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-14);
+      text-transform: uppercase;
+      letter-spacing: var(--ls-uppercase);
+      text-decoration: none;
+      transition: box-shadow var(--dur-base) var(--ease-standard);
+    }
+    .sc-cta:hover { box-shadow: var(--shadow-glow-md); }
+
+    /* Hero — placeholder so the header sits in context */
+    .sc-hero {
+      padding: var(--sp-32) var(--page-pad-x) var(--sp-24);
+      max-width: 1280px;
+    }
+    .sc-hero h1 {
+      font-family: var(--font-headings);
+      font-weight: var(--fw-black);
+      font-size: clamp(var(--fs-40), 8vw, var(--fs-96));
+      line-height: var(--lh-display);
+      letter-spacing: var(--ls-display);
+      margin: 0 0 var(--sp-4);
+      color: var(--sc-cyan);
+    }
+    .sc-hero p {
+      font-size: var(--fs-22);
+      color: var(--sc-cyan); opacity: 0.8;
+      max-width: 36ch; margin: 0;
+    }
+
+    @media (max-width: 767px) {
+      .sc-header { grid-template-columns: auto auto; padding: var(--sp-4) var(--page-pad-x); }
+      .sc-nav { display: none; } /* Would open in a drawer on mobile */
+    }
+  </style>
+</head>
+<body>
+
+  <header class="sc-header">
+    <a class="sc-logo" href="/">
+      <!-- Crown mark — geometric redraw based on favicon proportions. Vertical outer edges. -->
+      <svg class="sc-logo__mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="#00fff4">
+          <rect x="4" y="18" width="24" height="10"/>
+          <polygon points="4,18 10,18 4,9"/>
+          <polygon points="10,18 22,18 16,7"/>
+          <polygon points="22,18 28,18 28,9"/>
+          <circle cx="4"  cy="9" r="2.5"/>
+          <circle cx="16" cy="7" r="2.5"/>
+          <circle cx="28" cy="9" r="2.5"/>
+        </g>
+      </svg>
+      <span class="sc-logo__wordmark">SirCharles<span class="sc-logo__suffix">.DESIGN</span></span>
+    </a>
+
+    <nav class="sc-nav" aria-label="Primary">
+      <a class="sc-nav__link" href="/pages/my-work" aria-current="page">My Work</a>
+      <a class="sc-nav__link" href="/pages/about-me">About Me</a>
+      <a class="sc-nav__link" href="/pages/contact">Contact</a>
+    </nav>
+
+    <a class="sc-cta" href="/pages/contact">Say Hello →</a>
+  </header>
+
+  <section class="sc-hero">
+    <h1>Methodology meets artistry.</h1>
+    <p>Award-winning design.</p>
+  </section>
+
+</body>
+</html>

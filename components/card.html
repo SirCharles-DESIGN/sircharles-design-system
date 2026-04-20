@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SirCharles.DESIGN — Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;900&display=swap">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <style>
+    body {
+      background: var(--color-bg-page);
+      color: var(--color-fg-primary);
+      font-family: var(--font-body);
+      padding: var(--page-pad-y) var(--page-pad-x);
+      margin: 0;
+    }
+    .grid {
+      display: grid;
+      gap: var(--grid-gap);
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      max-width: 1280px;
+    }
+
+    /* ============================================================
+       Card — used for portfolio projects on the homepage
+       Variants: default, featured (with eyebrow + metric)
+       Surface: near-black with cyan-tinted hairline border
+       Hover:   subtle cyan glow + cyan border deepens
+       ============================================================ */
+    .sc-card {
+      background: var(--color-bg-surface);
+      border: var(--bw-hairline) solid var(--color-border);
+      border-radius: var(--radius-grid);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      transition:
+        border-color var(--dur-base) var(--ease-standard),
+        box-shadow   var(--dur-base) var(--ease-standard),
+        transform    var(--dur-base) var(--ease-emphatic);
+    }
+    .sc-card:hover {
+      border-color: var(--sc-cyan-60);
+      box-shadow: var(--shadow-glow-sm);
+      transform: translateY(-2px);
+    }
+
+    .sc-card__media {
+      aspect-ratio: 16 / 10;
+      background:
+        radial-gradient(circle at 30% 20%, var(--sc-cyan-15), transparent 60%),
+        linear-gradient(135deg, #0a0a0a, #001a18);
+      position: relative;
+    }
+    .sc-card__media::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.6));
+    }
+
+    .sc-card__body {
+      padding: var(--sp-6) var(--sp-6) var(--sp-4);
+      display: grid;
+      gap: var(--sp-3);
+    }
+    .sc-card__eyebrow {
+      font-size: var(--fs-12);
+      font-weight: var(--fw-bold);
+      text-transform: uppercase;
+      letter-spacing: var(--ls-uppercase);
+      color: var(--sc-cyan);
+      opacity: 0.7;
+    }
+    .sc-card__title {
+      font-family: var(--font-headings);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-28);
+      line-height: var(--lh-display);
+      letter-spacing: var(--ls-display);
+      color: var(--sc-cyan);
+      margin: 0;
+    }
+    .sc-card__sub {
+      font-size: var(--fs-14);
+      color: var(--sc-cyan);
+      opacity: 0.6;
+    }
+    .sc-card__desc {
+      font-size: var(--fs-16);
+      line-height: var(--lh-body);
+      color: var(--sc-cyan);
+      opacity: 0.85;
+    }
+
+    .sc-card__footer {
+      padding: var(--sp-4) var(--sp-6) var(--sp-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: var(--bw-hairline) solid var(--color-border);
+    }
+    .sc-card__metric {
+      font-family: var(--font-headings);
+      font-weight: var(--fw-black);
+      font-size: var(--fs-22);
+      color: var(--sc-cyan);
+    }
+    .sc-card__cta {
+      font-size: var(--fs-12);
+      font-weight: var(--fw-bold);
+      text-transform: uppercase;
+      letter-spacing: var(--ls-uppercase);
+      color: var(--sc-cyan);
+      text-decoration: none;
+      border-bottom: 1px solid var(--sc-cyan);
+      padding-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <article class="sc-card">
+      <div class="sc-card__media"></div>
+      <div class="sc-card__body">
+        <div class="sc-card__eyebrow">Hypergiant Galactic Systems</div>
+        <h3 class="sc-card__title">HIVE</h3>
+        <div class="sc-card__sub">Satellite Operations Control Software</div>
+        <p class="sc-card__desc">One operator now manages 75 to 100 spacecraft. Built with sci-fi-inspired interface design for real-time satellite operations.</p>
+      </div>
+      <footer class="sc-card__footer">
+        <span class="sc-card__metric">25× efficiency</span>
+        <a class="sc-card__cta" href="#">Full HIVE Story →</a>
+      </footer>
+    </article>
+
+    <article class="sc-card">
+      <div class="sc-card__media"></div>
+      <div class="sc-card__body">
+        <div class="sc-card__eyebrow">7-Eleven</div>
+        <h3 class="sc-card__title">Skipcart</h3>
+        <div class="sc-card__sub">Driver-Focused Logistics Platform</div>
+        <p class="sc-card__desc">The logistics platform that let 7-Eleven expand into delivery without third parties. Designed for the road.</p>
+      </div>
+      <footer class="sc-card__footer">
+        <span class="sc-card__metric">$65M acquisition</span>
+        <a class="sc-card__cta" href="#">Read Case Study →</a>
+      </footer>
+    </article>
+
+    <article class="sc-card">
+      <div class="sc-card__media"></div>
+      <div class="sc-card__body">
+        <div class="sc-card__eyebrow">Integral Reality Labs</div>
+        <h3 class="sc-card__title">Cub3d</h3>
+        <div class="sc-card__sub">Blockchain Memorabilia Authentication</div>
+        <p class="sc-card__desc">Made blockchain feel familiar instead of intimidating. Complex crypto, simple authentication.</p>
+      </div>
+      <footer class="sc-card__footer">
+        <span class="sc-card__metric">Mainstream-ready</span>
+        <a class="sc-card__cta" href="#">Read Case Study →</a>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>

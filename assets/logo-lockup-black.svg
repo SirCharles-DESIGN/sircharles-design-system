@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 64" width="480" height="64" role="img" aria-label="SirCharles.DESIGN">
+  <title>SirCharles.DESIGN</title>
+  <g transform="translate(0,8) scale(1.5)" fill="#000000">
+    <rect x="4" y="18" width="24" height="10"/>
+    <polygon points="4,18 10,18 4,9"/>
+    <polygon points="10,18 22,18 16,7"/>
+    <polygon points="22,18 28,18 28,9"/>
+    <circle cx="4"  cy="9" r="2.5"/>
+    <circle cx="16" cy="7" r="2.5"/>
+    <circle cx="28" cy="9" r="2.5"/>
+  </g>
+  <text x="64" y="44"
+        font-family="Mulish, Muli, system-ui, sans-serif"
+        font-weight="900"
+        font-size="32"
+        letter-spacing="-0.5"
+        fill="#000000">SIRCHARLES<tspan font-weight="400" letter-spacing="1.2" fill="#121212">.DESIGN</tspan></text>
+</svg>

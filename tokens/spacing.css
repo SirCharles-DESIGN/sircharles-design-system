@@ -1,0 +1,68 @@
+/* ============================================================
+   SirCharles.DESIGN — Spacing, Radius & Layout Tokens
+   The theme is generous — 50px page padding, 30px grid radius,
+   pill buttons. Density is deliberately low; the work breathes.
+   ============================================================ */
+
+:root {
+  /* -------- Spacing scale (4px base) -------- */
+  --sp-0:     0;
+  --sp-1:     0.25rem;   /*  4 */
+  --sp-2:     0.5rem;    /*  8 */
+  --sp-3:     0.75rem;   /* 12 */
+  --sp-4:     1rem;      /* 16 */
+  --sp-5:     1.25rem;   /* 20 */
+  --sp-6:     1.5rem;    /* 24 */
+  --sp-8:     2rem;      /* 32 */
+  --sp-10:    2.5rem;    /* 40 */
+  --sp-12:    3rem;      /* 48 */
+  --sp-16:    4rem;      /* 64 */
+  --sp-20:    5rem;      /* 80 — section vertical rhythm */
+  --sp-24:    6rem;      /* 96 */
+  --sp-32:    8rem;      /* 128 */
+
+  /* -------- Page padding (per theme: 50px desktop) -------- */
+  --page-pad-x:           3.125rem;  /* 50px */
+  --page-pad-y:           3.125rem;  /* 50px */
+  --grid-gap:             3.125rem;  /* 50px */
+
+  /* -------- Radii (per theme) -------- */
+  --radius-pill:          120px;     /* Button radius — full pill */
+  --radius-grid:          30px;      /* Cards, sections, large surfaces */
+  --radius-grid-mobile:   20px;      /* Cards on mobile */
+  --radius-input:         12px;      /* Inputs — slightly tighter than cards */
+  --radius-pill-sm:       9999px;
+
+  /* -------- Border widths (per theme) -------- */
+  --bw-hairline:          1px;       /* Default borders, buttons */
+  --bw-section:           20px;      /* Large structural frames */
+  --bw-container:         20px;      /* Container outer frames */
+
+  /* -------- Shadows -------- */
+  /* Brand has minimal shadows on dark BG; cyan glow stands in for elevation */
+  --shadow-glow-sm:       0 0 0 1px rgba(0, 255, 244, 0.2),  0 0 12px rgba(0, 255, 244, 0.15);
+  --shadow-glow-md:       0 0 0 1px rgba(0, 255, 244, 0.3),  0 0 24px rgba(0, 255, 244, 0.25);
+  --shadow-glow-lg:       0 0 0 1px rgba(0, 255, 244, 0.4),  0 0 48px rgba(0, 255, 244, 0.35);
+
+  /* -------- Motion -------- */
+  --ease-standard:        cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphatic:        cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:             120ms;
+  --dur-base:             220ms;
+  --dur-slow:             440ms;
+
+  /* -------- Layout breakpoints (advisory; CSS uses raw values) -------- */
+  --bp-mobile:            767px;
+  --bp-tablet:            1024px;
+  --bp-desktop:           1440px;
+}
+
+/* Mobile padding tightens slightly */
+@media (max-width: 767px) {
+  :root {
+    --page-pad-x: 1.5rem;   /* 24px */
+    --page-pad-y: 2rem;     /* 32px */
+    --grid-gap:   1.5rem;   /* 24px */
+    --radius-grid: var(--radius-grid-mobile);
+  }
+}

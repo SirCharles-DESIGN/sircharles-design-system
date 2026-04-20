@@ -1,0 +1,45 @@
+/* ============================================================
+   SirCharles.DESIGN — Color Tokens
+   Source of truth: live theme tokens from sircharles.design
+   Aesthetic: cyberpunk-luxe — pure black canvas, electric cyan,
+   used with restraint. No second hue competes with the cyan.
+   ============================================================ */
+
+:root {
+  /* -------- Brand core -------- */
+  --sc-black:           #000000;  /* Page background, deepest layer */
+  --sc-near-black:      #0a0a0a;  /* Cards, surfaces, modals */
+  --sc-soft-black:      #121212;  /* Accent foreground (text on white) */
+  --sc-border-dark:     #141919;  /* Subtle structural borders */
+  --sc-cyan:            #00fff4;  /* THE brand color — text, links, marks */
+  --sc-white:           #ffffff;  /* High-contrast accent surface */
+
+  /* -------- Cyan tints (use these instead of opaque cyan for backgrounds) -------- */
+  --sc-cyan-04:         rgba(0, 255, 244, 0.04);  /* Faintest wash */
+  --sc-cyan-08:         rgba(0, 255, 244, 0.08);  /* Hover/secondary surface */
+  --sc-cyan-10:         rgba(0, 255, 244, 0.10);  /* Popup/highlight */
+  --sc-cyan-15:         rgba(0, 255, 244, 0.15);  /* Default border */
+  --sc-cyan-30:         rgba(0, 255, 244, 0.30);  /* Form border (rest) */
+  --sc-cyan-60:         rgba(0, 255, 244, 0.60);  /* Form border (focus) */
+
+  /* -------- Semantic aliases (use these in components) -------- */
+  --color-bg-page:      var(--sc-black);
+  --color-bg-surface:   var(--sc-near-black);
+  --color-bg-popup:     var(--sc-cyan);          /* Inverts on light pop-ups */
+  --color-fg-primary:   var(--sc-cyan);          /* All body & headline text */
+  --color-fg-onlight:   var(--sc-near-black);    /* Text on white/cyan surfaces */
+  --color-fg-accent:    var(--sc-white);
+  --color-border:       var(--sc-cyan-15);
+  --color-border-form:  var(--sc-cyan-30);
+  --color-border-focus: var(--sc-cyan-60);
+  --color-divider:      var(--sc-border-dark);
+}
+
+/* Light-on-cyan inverse scheme (used for product card popups, hover states) */
+.sc-on-cyan {
+  --color-bg-page:    var(--sc-cyan);
+  --color-bg-surface: var(--sc-cyan);
+  --color-fg-primary: var(--sc-black);
+  --color-fg-accent:  var(--sc-near-black);
+  --color-border:     rgba(0, 0, 0, 0.30);
+}
