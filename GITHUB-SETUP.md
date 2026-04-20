@@ -2,7 +2,7 @@
 
 Hi Bob — this is the no-prior-experience walkthrough. Read it once before you start so you know roughly where it's going. Each step is small. Every term is defined the first time it appears.
 
-**What you'll end up with at the end:** a public web page at `https://github.com/<your-username>/sircharles-design-system` that contains every file in this folder. You'll paste that URL into Claude Design and you're done.
+**What you'll end up with at the end:** a public web page at `https://github.com/SirCharles-DESIGN/sircharles-design-system` that contains every file in this folder. You'll paste that URL into Claude Design and you're done.
 
 **Total time:** about 15–20 minutes. The first 5 are creating an account.
 
@@ -66,7 +66,7 @@ This is the part that surprises beginners — you can literally drag your folder
 
 1. On your empty repo page, look for a small link near the middle: **"uploading an existing file"** *(it's part of the line "You can also import code from another repository using…")* or just click the **Add file** dropdown near the top right and choose **Upload files**.
 
-   - If you don't see "uploading an existing file" link, the URL pattern is `https://github.com/<your-username>/sircharles-design-system/upload/main` — paste that into your browser.
+   - If you don't see "uploading an existing file" link, the URL pattern is `https://github.com/SirCharles-DESIGN/sircharles-design-system/upload/main` — paste that into your browser.
 
 2. You'll land on a page with a big dashed-line drop zone that says "Drag files here to add them to your repository."
 
