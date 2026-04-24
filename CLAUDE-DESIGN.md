@@ -126,6 +126,28 @@ Source of truth: https://sircharles.design — extracted 2026-04-20. If anything
 
 ---
 
+## 7. Signature button hover (don't strip this on import)
+
+The button component in `components/button.html` carries the single most recognizable interaction on the live site. If you or any agent is tempted to "simplify" it into a generic hover state, read this first.
+
+**Ghost / outline variant:**
+A `::before` pseudo-element starts at `width: 0` behind the label and animates to `width: 100%` on hover. As the cyan plate slides across, the label color flips from cyan to near-black. Border-color locks to cyan throughout.
+
+**Primary (solid) variant:**
+No sliding plate (the pill is already filled). Instead, on hover the label shifts to `font-style: italic` and a soft white diffuse glow (`rgba(255, 255, 255, 0.4) 0 0 60px 5px`) pulses out behind the whole pill. The italic shift is subtle and reads as a micro-flourish.
+
+**Why the pattern is structured the way it is:**
+
+- `.sc-btn` sets `position: relative; overflow: hidden; isolation: isolate` so the sliding `::before` can be clipped to the pill's rounded bounds.
+- The button's text content must live inside a child element (a `<span>` is used in the demo). That child sits at `z-index: 1` so the `::before` (at `z-index: -1`) slides underneath without covering the label.
+- All hover rules are inside `@media (hover: hover) and (pointer: fine)` so touch devices don't get a stuck hover state. This is the modern replacement for the live theme's Modernizr `.no-touchevents` class.
+- Motion timing is `300ms linear` (the theme's `--dur-slow`), not a bouncy cubic-bezier. The linearity is a deliberate brand characteristic.
+
+**Shadow token to preserve:**
+`--shadow-glow-white: rgba(255, 255, 255, 0.4) 0 0 60px 5px;` lives in `tokens/spacing.css`. It is the only white shadow in the system and it exists solely for primary-button hover.
+
+---
+
 ## Final checklist before clicking "Save"
 
 - [ ] Company name field has exactly `SirCharles.DESIGN`
