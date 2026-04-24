@@ -21,70 +21,174 @@
     .label { color: var(--color-fg-primary); opacity: 0.6; font-size: var(--fs-12); text-transform: uppercase; letter-spacing: var(--ls-uppercase); margin-bottom: var(--sp-2); }
 
     /* ============================================================
-       Button — base + variants
+       Button — base + variants (live-site parity, Phase 1b)
+
        Variants: primary (cyan-on-black), ghost (transparent + cyan border),
                  inverse (black-on-cyan), link
        Sizes:    sm, md (default), lg
-       States:   default, hover, active, focus, disabled
-       Per theme: pill radius (120px), uppercase, hairline border
-       ============================================================ */
-    .sc-btn {
-      --_bg:        transparent;
-      --_fg:        var(--sc-cyan);
-      --_border:    var(--sc-cyan);
-      --_pad-y:     0.875rem;
-      --_pad-x:     1.75rem;
-      --_fs:        var(--fs-14);
+       States:   default, hover, active, focus-visible, disabled
 
+       Signature hover (the thing that makes the brand feel custom):
+         1. A ::before pseudo-element starts at width: 0 behind the label
+            and expands to width: 100% on hover — the sliding fill.
+         2. The label color flips from cyan to near-black as the plate
+            slides across.
+         3. Primary buttons add font-style: italic on hover.
+         4. A soft white glow box-shadow pulses out.
+         5. Border-color locks to cyan.
+
+       Hover is gated behind @media (hover: hover) and (pointer: fine) so
+       touch devices don't get a stuck hover state. This is the modern
+       replacement for the live theme's Modernizr .no-touchevents class.
+       ============================================================ */
+
+    .sc-btn {
+      /* Tunable per variant via custom props */
+      --_bg:             transparent;
+      --_fg:             var(--sc-cyan);
+      --_fg-hover:       var(--sc-black);
+      --_border:         var(--sc-cyan);
+      --_fill:           var(--sc-cyan);        /* color of sliding ::before */
+      --_pad-y:          15px;
+      --_pad-x:          30px;
+      --_fs:             var(--fs-12);
+      --_min-h:          50px;
+
+      position: relative;
+      isolation: isolate;                       /* keep ::before layered correctly */
+      overflow: hidden;                         /* clip the sliding fill */
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: var(--sp-2);
+      min-height: var(--_min-h);
       padding: var(--_pad-y) var(--_pad-x);
       background: var(--_bg);
       color: var(--_fg);
       border: var(--bw-hairline) solid var(--_border);
       border-radius: var(--radius-pill);
       font-family: var(--font-body);
-      font-weight: var(--fw-bold);
+      font-weight: var(--fw-regular);
       font-size: var(--_fs);
       text-transform: var(--tt-button);
       letter-spacing: var(--ls-uppercase);
       text-decoration: none;
       cursor: pointer;
       transition:
-        background var(--dur-base) var(--ease-standard),
-        color      var(--dur-base) var(--ease-standard),
-        box-shadow var(--dur-base) var(--ease-standard),
-        transform  var(--dur-fast) var(--ease-standard);
+        color         var(--dur-slow) var(--ease-standard),
+        border-color  var(--dur-slow) var(--ease-standard),
+        box-shadow    var(--dur-slow) var(--ease-standard),
+        font-style    var(--dur-slow) var(--ease-standard);
     }
 
-    /* Variants */
-    .sc-btn--primary { --_bg: var(--sc-cyan); --_fg: var(--sc-black); --_border: var(--sc-cyan); }
-    .sc-btn--ghost   { /* uses defaults */ }
-    .sc-btn--inverse { --_bg: var(--sc-white); --_fg: var(--sc-black); --_border: var(--sc-white); }
-    .sc-btn--link    {
-      --_pad-y: 0; --_pad-x: 0; --_border: transparent; --_bg: transparent;
+    /* The sliding fill. Sits behind the label, grows from left to right. */
+    .sc-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0;
+      background: var(--_fill);
+      transition: width var(--dur-slow) var(--ease-standard);
+      z-index: -1;
+    }
+
+    /* Put label children on their own stacking layer so ::before sits behind. */
+    .sc-btn > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* -------- Variants -------- */
+
+    /* Primary — solid cyan plate already visible; hover flourish is italic
+       label + white glow. The sliding fill is suppressed here because the
+       pill is already full. */
+    .sc-btn--primary {
+      --_bg:       var(--sc-cyan);
+      --_fg:       var(--sc-black);
+      --_border:   var(--sc-cyan);
+    }
+    .sc-btn--primary::before { content: none; }
+
+    /* Ghost — outline with cyan text, sliding cyan fill on hover (signature) */
+    .sc-btn--ghost { /* uses defaults */ }
+
+    /* Inverse — white plate for use on cyan backgrounds or imagery */
+    .sc-btn--inverse {
+      --_bg:     var(--sc-white);
+      --_fg:     var(--sc-black);
+      --_border: var(--sc-white);
+      --_fill:   var(--sc-white);
+    }
+    .sc-btn--inverse::before { content: none; }
+
+    /* Link — no pill, inline underline */
+    .sc-btn--link {
+      --_pad-y: 0;
+      --_pad-x: 0;
+      --_min-h: auto;
+      --_border: transparent;
+      --_bg: transparent;
       border-bottom: var(--bw-hairline) solid var(--sc-cyan);
-      border-radius: 0; padding-bottom: 4px;
+      border-radius: 0;
+      padding-bottom: 4px;
+      overflow: visible;
+    }
+    .sc-btn--link::before { content: none; }
+
+    /* -------- Sizes -------- */
+    .sc-btn--sm { --_pad-y: 10px; --_pad-x: 20px; --_fs: var(--fs-12); --_min-h: 40px; }
+    .sc-btn--lg { --_pad-y: 20px; --_pad-x: 40px; --_fs: var(--fs-14); --_min-h: 60px; }
+
+    /* -------- Hover (pointer devices only) -------- */
+    @media (hover: hover) and (pointer: fine) {
+      /* Ghost / outline — the signature sliding fill */
+      .sc-btn:hover {
+        color: var(--_fg-hover);
+        border-color: var(--sc-cyan);
+      }
+      .sc-btn:hover::before { width: 100%; }
+
+      /* Primary — italic label + soft white glow, no sliding fill */
+      .sc-btn--primary:hover {
+        font-style: italic;
+        box-shadow: var(--shadow-glow-white);
+      }
+
+      /* Inverse — medium cyan glow on hover */
+      .sc-btn--inverse:hover {
+        box-shadow: var(--shadow-glow-md);
+      }
+
+      /* Link — underline thickens */
+      .sc-btn--link:hover {
+        border-bottom-width: 2px;
+      }
     }
 
-    /* Sizes */
-    .sc-btn--sm { --_pad-y: 0.5rem;   --_pad-x: 1.125rem; --_fs: var(--fs-12); }
-    .sc-btn--lg { --_pad-y: 1.125rem; --_pad-x: 2.5rem;   --_fs: var(--fs-16); }
-
-    /* States */
-    .sc-btn:hover  { box-shadow: var(--shadow-glow-sm); }
-    .sc-btn--primary:hover { box-shadow: var(--shadow-glow-md); }
-    .sc-btn:active { transform: translateY(1px); }
+    /* -------- Focus (keyboard only) --------
+       The live site suppresses button focus rings entirely. We keep a
+       subtle cyan ring for WCAG 2.1 AA keyboard navigation. See
+       delta-report.md Decision A. */
+    .sc-btn:focus { outline: none; }
     .sc-btn:focus-visible {
       outline: none;
-      box-shadow: var(--shadow-glow-md), 0 0 0 3px var(--sc-cyan-30);
+      box-shadow: 0 0 0 3px var(--sc-cyan-30);
     }
+    .sc-btn--primary:focus-visible {
+      box-shadow: var(--shadow-glow-white), 0 0 0 3px var(--sc-cyan-30);
+    }
+
+    /* -------- Disabled (matches live site tone) -------- */
     .sc-btn[disabled],
     .sc-btn[aria-disabled="true"] {
-      opacity: 0.4; cursor: not-allowed; box-shadow: none; transform: none;
+      opacity: 0.6;
+      cursor: default;
+      box-shadow: none;
+      font-style: normal;
     }
+    .sc-btn[disabled]::before,
+    .sc-btn[aria-disabled="true"]::before { width: 0 !important; }
   </style>
 </head>
 <body>
@@ -94,35 +198,35 @@
     </h1>
 
     <div>
-      <div class="label">Primary — for the one action that matters</div>
+      <div class="label">Primary — for the one action that matters (hover to see italic + white glow)</div>
       <div class="row">
-        <button class="sc-btn sc-btn--primary sc-btn--sm">Say Hello</button>
-        <button class="sc-btn sc-btn--primary">Say Hello</button>
-        <button class="sc-btn sc-btn--primary sc-btn--lg">Say Hello</button>
-        <button class="sc-btn sc-btn--primary" disabled>Disabled</button>
+        <button class="sc-btn sc-btn--primary sc-btn--sm"><span>Say Hello</span></button>
+        <button class="sc-btn sc-btn--primary"><span>Say Hello</span></button>
+        <button class="sc-btn sc-btn--primary sc-btn--lg"><span>Say Hello</span></button>
+        <button class="sc-btn sc-btn--primary" disabled><span>Disabled</span></button>
       </div>
     </div>
 
     <div>
-      <div class="label">Ghost — the workhorse</div>
+      <div class="label">Ghost — the workhorse, with the signature sliding fill</div>
       <div class="row">
-        <button class="sc-btn sc-btn--ghost sc-btn--sm">Full HIVE Story</button>
-        <button class="sc-btn sc-btn--ghost">Full HIVE Story</button>
-        <button class="sc-btn sc-btn--ghost sc-btn--lg">Full HIVE Story</button>
+        <button class="sc-btn sc-btn--ghost sc-btn--sm"><span>Full HIVE Story</span></button>
+        <button class="sc-btn sc-btn--ghost"><span>Full HIVE Story</span></button>
+        <button class="sc-btn sc-btn--ghost sc-btn--lg"><span>Full HIVE Story</span></button>
       </div>
     </div>
 
     <div>
       <div class="label">Inverse — when sitting on cyan or imagery</div>
       <div class="row" style="background: var(--sc-cyan); padding: var(--sp-6); border-radius: var(--radius-grid);">
-        <button class="sc-btn sc-btn--inverse">Let's Build</button>
-        <button class="sc-btn sc-btn--inverse sc-btn--lg">Let's Build Something Amazing</button>
+        <button class="sc-btn sc-btn--inverse"><span>Let's Build</span></button>
+        <button class="sc-btn sc-btn--inverse sc-btn--lg"><span>Let's Build Something Amazing</span></button>
       </div>
     </div>
 
     <div>
       <div class="label">Link — inline, low-friction</div>
-      <p>For more on the methodology, <a href="#" class="sc-btn sc-btn--link">read the full case study</a>.</p>
+      <p style="font-size: var(--fs-body);">For more on the methodology, <a href="#" class="sc-btn sc-btn--link"><span>read the full case study</span></a>.</p>
     </div>
   </div>
 </body>
