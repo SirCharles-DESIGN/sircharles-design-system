@@ -23,15 +23,21 @@
   --fw-black:            900;   /* Heading bold / display */
 
   /* Type scale — mobile-first; large display sizes earn their keep on dark BG */
-  --fs-12:               0.75rem;   /* 12 — caption / fine print */
-  --fs-14:               0.875rem;  /* 14 — UI labels */
-  --fs-16:               1rem;      /* 16 — body */
-  --fs-18:               1.125rem;  /* 18 — body large / lead */
+  --fs-12:               0.75rem;   /* 12 — body default / caption / UI labels */
+  --fs-14:               0.875rem;  /* 14 — UI labels (slightly larger) */
+  --fs-16:               1rem;      /* 16 — long-form prose, lead paragraphs */
+  --fs-18:               1.125rem;  /* 18 — body large */
   --fs-22:               1.375rem;  /* 22 — H4 / card title */
   --fs-28:               1.75rem;   /* 28 — H3 */
   --fs-40:               2.5rem;    /* 40 — H2 */
   --fs-64:               4rem;      /* 64 — H1 (mobile-friendly hero) */
   --fs-96:               6rem;      /* 96 — Display (matches theme base) */
+
+  /* -------- Body defaults --------
+     The live theme runs a tight 12px body so size feels reserved for
+     headlines. .sc-prose steps back up to 16px for long-form reading
+     (case studies, editorial copy). Pick your battle in the markup. */
+  --fs-body:             var(--fs-12);
 
   /* Line heights */
   --lh-display:          1.1;       /* Headings — tight per theme */
@@ -68,7 +74,7 @@ h6, .sc-h6 { font-size: var(--fs-18); text-transform: var(--tt-button); letter-s
 body, p, .sc-body {
   font-family: var(--font-body);
   font-weight: var(--fw-regular);
-  font-size: var(--fs-16);
+  font-size: var(--fs-body);
   line-height: var(--lh-body);
 }
 
@@ -80,4 +86,10 @@ body, p, .sc-body {
   letter-spacing: var(--ls-uppercase);
 }
 
-.sc-prose { line-height: var(--lh-prose); }
+/* Long-form reading — step body size back up to 16px and loosen line-height.
+   Apply to case-study article bodies, blog posts, anything text-heavy. */
+.sc-prose {
+  font-size: var(--fs-16);
+  line-height: var(--lh-prose);
+}
+.sc-prose p + p { margin-top: 1em; }

@@ -63,4 +63,6 @@ Open the HTMLs in `components/` to see the brand rendered. Read `brand/foundatio
 
 Every value in this repo was extracted from the live theme at sircharles.design on **2026-04-20**. Voice samples are direct quotes from the homepage, /pages/my-work, /pages/about-me, and /pages/contact. Color tokens and font choices match the Shopify theme's CSS exactly.
 
+On **2026-04-24** the package was re-audited against the live DOM using Claude in Chrome. The audit caught a handful of drifts (button base styles, motion timing, a missing white-glow shadow, and the signature button hover interaction). All fixes landed in the `audit/phase-1b-live-site-parity` branch. See `audit/delta-report.md` for the full write-up.
+
 If the live site changes materially, regenerate this package — don't edit it by hand piecemeal.
