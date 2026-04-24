@@ -43,13 +43,19 @@
   --shadow-glow-sm:       0 0 0 1px rgba(0, 255, 244, 0.2),  0 0 12px rgba(0, 255, 244, 0.15);
   --shadow-glow-md:       0 0 0 1px rgba(0, 255, 244, 0.3),  0 0 24px rgba(0, 255, 244, 0.25);
   --shadow-glow-lg:       0 0 0 1px rgba(0, 255, 244, 0.4),  0 0 48px rgba(0, 255, 244, 0.35);
+  /* Signature hover glow — soft white diffuse, not cyan.
+     Matches live theme exactly. Used on primary-button hover. */
+  --shadow-glow-white:    rgba(255, 255, 255, 0.4) 0 0 60px 5px;
 
   /* -------- Motion -------- */
-  --ease-standard:        cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Live theme is deliberately linear and snappy. The button sliding-fill
+     pseudo-element uses --dur-slow so the plate has time to travel.
+     Card lifts and other emphatic moments opt into --ease-emphatic. */
+  --ease-standard:        linear;
   --ease-emphatic:        cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-fast:             120ms;
-  --dur-base:             220ms;
-  --dur-slow:             440ms;
+  --dur-fast:             100ms;
+  --dur-base:             175ms;
+  --dur-slow:             300ms;
 
   /* -------- Layout breakpoints (advisory; CSS uses raw values) -------- */
   --bp-mobile:            767px;
